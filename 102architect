@@ -1,0 +1,114 @@
+#!/usr/bin/python3
+
+from math import *
+import sys
+
+############## ERROR MANAGEMENT ###############
+
+#VERIFIER QUE LES CHIFFRES SONT DES ENTIERS
+
+def isint(arg):
+     try:
+          int(arg)
+     except ValueError:
+          print ("Arguments should be integers !")
+          return sys.exit(84)
+     return int(arg)
+
+#VERIFIER QUE LES ARGUMENTS SONT DES NOMBRES       
+def isfloat(arg):
+     try:
+          float(arg)
+     except ValueError:
+          print ("The arguments have to be digits !")
+          return sys.exit(84)
+     return float(arg)
+
+if (len(sys.argv) < 5):
+     print ("You have to insert more than 3 arguments !")
+     sys.exit(84)
+
+def isvalidarg(arg):
+     if (arg == "-t" or arg == "-s" or arg == "-h" or arg == "-r"):
+          return arg
+     return sys.exit(84)
+
+############## ERROR MANAGEMENT ###############
+
+count = len(sys.argv) - 4
+x = isint(sys.argv[1])
+y = isint(sys.argv[2])
+transfo1 = isvalidarg(sys.argv[3])
+
+############## FLAGS ###############
+
+# FLAG T
+while (count != 0):
+     if (transfo1 == "-t"):
+          arg1 = isint(sys.argv[4])
+          count = count - 1
+          arg2 = isint(sys.argv[5])
+          count = count - 1
+          print ("Translation by the vector (",arg1,", ", arg2,")", sep='')
+          print ("%.2f"%1,'\t',"%.2f"%0,'\t',"%.2f"%arg1)
+          print ("%.2f"%0,'\t',"%.2f"%1,'\t',"%.2f"%arg2)
+          print ("%.2f"%0,'\t',"%.2f"%0,'\t',"%.2f"%1)
+          calcul1 = x + arg1
+          calcul2 = y + arg2
+          print ('(',x,',',y,')',' ',"=>",' ','(',"%.2f"%calcul1,',',"%.2f"%calcul2,')', sep='')
+          
+     # FLAG T
+     
+     # FLAG S
+
+     if (transfo1 == "-s"):
+          arg3 = isint(sys.argv[4])
+          count = count - 1
+          print ("Symmetry about an axis inclined with an angle of",arg3,"degrees")
+     
+     # FLAG S
+          
+     # FLAG H
+
+     if (transfo1 == "-h"):
+          arg4 = isint(sys.argv[4])
+          count = count - 1
+          arg5 = isint(sys.argv[5])
+          count = count - 1
+          print ("Homothety by the ratios",arg4,"and",arg5)
+          print ("%.2f"%arg4,'\t',"%.2f"%0.00,'\t',"%.2f"%0)
+          print ("%.2f"%0,'\t',"%.2f"%arg5,'\t',"%.2f"%0)
+          print ("%.2f"%0,'\t',"%.2f"%0,'\t',"%.2f"%1)
+          calcul3 = x * arg4
+          calcul4 = y * arg5
+          print ('(',x,',',y,')',' ',"=>",' ','(',"%.2f"%calcul3,',',"%.2f"%calcul4,')', sep='')
+     
+     # FLAG H
+          
+     # FLAG R
+
+     if (transfo1 == "-r"):
+          arg6 = isint(sys.argv[4])
+          count = count - 1
+          print ("Rotation at a",arg6,"degree angle")
+          arg6 = arg6 / (180/pi)
+          if (y != 0):
+               teta = atan(x/y) ## ANGLE PAR RAPPORT A X
+          else:
+               teta = 0
+          if (x != 0):
+               alpha = atan(y/x) ## ANGLE PAR RAPPORT A Y
+          else:
+               alpha = 0
+          ## CALCULER L'ANGLE D'ORIGINE
+          calcul5 = x * cos(alpha) - y*sin(alpha)
+          calcul6 = x * sin(alpha) - y*cos(alpha)
+          print("%.2f"%cos(teta),'\t',"%.2f"%-sin(teta),'\t',"%.2f"%0)
+          print("%.2f"%sin(teta),'\t',"%.2f"%cos(teta),'\t',"%.2f"%0)
+          print ("%.2f"%0,'\t',"%.2f"%0,'\t',"%.2f"%1)
+          #centre 0, angle alpha
+
+     # FLAG R
+
+############## FLAGS ###############
+calcul1 = '?'
